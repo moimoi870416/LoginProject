@@ -1,0 +1,484 @@
+{
+	"info": {
+		"_postman_id": "f486db0f-2344-4802-b5c3-0f179b4ea755",
+		"name": "安永",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13281212"
+	},
+	"item": [
+		{
+			"name": "/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// 检查响应状态码\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"// 解析响应体\r",
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"// 提取 jwtToken 并设置为环境变量\r",
+							"if (jsonData.jwtToken) {\r",
+							"    pm.environment.set(\"jwtToken\", jsonData.jwtToken);\r",
+							"    console.log(\"JWT Token set in environment variable: \" + jsonData.jwtToken);\r",
+							"} else {\r",
+							"    console.log(\"jwtToken not found in response\");\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"account\": \"admin\",\n  \"password\": \"admin\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:7290/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7290",
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(success)admin",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": \"admin\",\n  \"password\": \"admin\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:7290/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "(success) vip",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": \"vip\",\n  \"password\": \"vip\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:7290/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "(success) regular",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": \"regular\",\n  \"password\": \"regular\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:7290/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "(error) wrong password",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": \"admin\",\n  \"password\": \"1234\"\n}"
+						},
+						"url": {
+							"raw": "https://localhost:7290/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "/user/info",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:7290/user/info",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7290",
+					"path": [
+						"user",
+						"info"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(success)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7290/user/info",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "(error) invalid jwt",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://localhost:7290/user/info",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"user",
+								"info"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "/manage/permisson",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "text/plain"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "{{jwtToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"account\": \"regular\",\n  \"identity\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7290/manage/permisson",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7290",
+					"path": [
+						"manage",
+						"permisson"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "(success) set regular as vip",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": \"regular\",\n  \"identity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7290/manage/permisson",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"manage",
+								"permisson"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "(success) set vip as regular",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{jwtToken}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": \"regular\",\n  \"identity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7290/manage/permisson",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"manage",
+								"permisson"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "(error) access denied",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"account\": \"regular\",\n  \"identity\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7290/manage/permisson",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7290",
+							"path": [
+								"manage",
+								"permisson"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		}
+	]
+}
